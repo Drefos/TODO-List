@@ -134,7 +134,6 @@ public class MainController implements Initializable{
         editTaskMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(!tableView.getItems().isEmpty()) {
                     edit = true;
                     lastView.setVisible(false);
                     addView.setVisible(true);
@@ -143,20 +142,22 @@ public class MainController implements Initializable{
                     addCancel.setVisible(false);
                     add.setText("Save");
                     lockMenu(true);
-                }
+
             }
         });
 
         deleteTaskMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(!tableView.getItems().isEmpty()) {
                     dataReader.remove(tableView.getSelectionModel().getFocusedIndex());
                     chooseTitle.setText("");
                     chooseDeadline.setText("");
                     chooseNote.setText("");
                     chooseDeadline.setStyle("-fx-background-color: #dbdbdb; -fx-text-fill: #000000");
-                }
+                    if(tableView.getItems().isEmpty()) {
+                        editTaskMenuItem.setDisable(true);
+                        deleteTaskMenuItem.setDisable(true);
+                    }
             }
         });
     }
@@ -186,6 +187,11 @@ public class MainController implements Initializable{
                     lockMenu(false);
                     add.setText("Add new task");
                     loadIndex(index=0);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("None Title");
+                    alert.setHeaderText("To save task, 'Title' field can't be empty.");
+                    alert.showAndWait();
                 }
             }
         });
@@ -196,7 +202,11 @@ public class MainController implements Initializable{
                 lastView.setVisible(true);
                 addView.setVisible(false);
                 tableView.setDisable(false);
-                lockMenu(false);
+                if(tableView.getItems().isEmpty()) {
+                    addTaskMenuItem.setDisable(false);
+                } else {
+                    lockMenu(false);
+                }
             }
         });
     }
@@ -221,6 +231,9 @@ public class MainController implements Initializable{
             } else {
                 chooseDeadline.setStyle("-fx-background-color: #dbdbdb; -fx-text-fill: #000000");
             }
+        } else {
+            editTaskMenuItem.setDisable(true);
+            deleteTaskMenuItem.setDisable(true);
         }
     }
 
