@@ -14,7 +14,7 @@ public class LastViewController implements Initializable{
     private Label lastTitleLabel;
 
     @FXML
-    private Label lastDealineLabel;
+    private Label lastDeadlineLabel;
 
     @FXML
     private TextArea lastNotesTextArea;
@@ -22,25 +22,17 @@ public class LastViewController implements Initializable{
     public Label getLastTitleLabel() {
         return lastTitleLabel;
     }
-    public void setLastTitleLabel(Label lastTitleLabel) {
-        this.lastTitleLabel = lastTitleLabel;
-    }
 
-    public Label getLastDealineLabel() {
-        return lastDealineLabel;
-    }
-    public void setLastDealineLabel(Label lastDealineLabel) {
-        this.lastDealineLabel = lastDealineLabel;
+    public Label getLastDeadlineLabel() {
+        return lastDeadlineLabel;
     }
 
     public TextArea getLastNotesTextArea() {
         return lastNotesTextArea;
     }
-    public void setLastNotesTextArea(TextArea lastNotesTextArea) {
-        this.lastNotesTextArea = lastNotesTextArea;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

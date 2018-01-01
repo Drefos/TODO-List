@@ -2,23 +2,19 @@ package controller;
 
 import app.DataReader;
 import app.Task;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable{
@@ -214,7 +210,7 @@ public class MainController implements Initializable{
     // load fields from LastViewController
     private void configLastViewController() {
         chooseTitle = lastViewController.getLastTitleLabel();
-        chooseDeadline = lastViewController.getLastDealineLabel();
+        chooseDeadline = lastViewController.getLastDeadlineLabel();
         chooseNote = lastViewController.getLastNotesTextArea();
 
     }
@@ -260,8 +256,7 @@ public class MainController implements Initializable{
         LocalDate taskDate = LocalDate.parse(task[2] + "-" + task[1] + "-" + task[0]);
         LocalDate nowDate = LocalDate.now();
         nowDate = nowDate.plusDays(3);
-        if(nowDate.isEqual(taskDate)) return true;
-        return taskDate.isBefore(nowDate) ? true : false;
+        return nowDate.isEqual(taskDate) || taskDate.isBefore(nowDate);
     }
 
     // save tasks list to file
